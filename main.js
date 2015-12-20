@@ -39,8 +39,32 @@ function createServer() {
       console.log("msg! " + msg.utf8Data);
       var msg_key = msg.utf8Data.split(":")[0];
       var msg_value = msg.utf8Data.split(":")[1];
-      if (msg_key === "color") {
-        orb.color(msg_value);
+      var isOkSend = true;
+      switch (msg_key) {
+        case "color":
+          orb.color(msg_value);
+          break;
+        case "get":
+          isOkSend = false;
+          switch (msg_value) {
+            case "color":
+              orb.getColor(function(err, data) {
+                websocket.send(data.color);
+              });
+              break;
+          }
+          break;
+        case "roll":
+          var power = msg_value.split(",")[0];
+          var angle = msg_value.split(",")[1];
+          orb.roll(parseInt(power), parseInt(angle));
+          break;
+        case "stop":
+          orb.roll(0, 0);
+          break;
+      }
+      if (isOkSend) {
+        websocket.send("OK.");
       }
     });
     websocket.on('close', function(code, desc) {

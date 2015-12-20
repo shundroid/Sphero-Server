@@ -1,9 +1,10 @@
 # Sphero-server
-  
 websocketとnode.jsで、Fx0などのbluetooth非対応デバイス、IoTデバイスからspheroへアクセスできるようにする。  
-  
+
+## 詳細
+[Wiki](https://github.com/shundroid/Sphero-Server/wiki/)も見て。
+
 ## 使いかた
-  
 あらかじめ、node.jsをインストールしておく。  
 このファイルがあるディレクトリで、  
 ```bash
@@ -22,4 +23,8 @@ node main.js
 connected spheroと表示された後、  
 Fx0などのbluetooth非対応デバイスから、`http://<サーバーのIPアドレス>:<ポート>/`にアクセス。  
 textboxで、`color:red`や、`color:green`などと入力してみると、色が変わる！！  
-# Sphero-Server 
+
+## 最後に
+見てくれてありがとうございます。  
+不具合や要望がありましたら、Issueに上げてください。  
+  
