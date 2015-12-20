@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sphero-server</title>
+  <script type="text/javascript">
+  (function() {
+    var ws;
+    var output;
+    var send;
+    document.addEventListener("DOMContentLoaded", () => {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "settings.json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var data = JSON.parse(xhr.responseText);
+          ws = new WebSocket("ws://" + data["ip"] + ":" + data["port"]);
+          output = document.getElementById("output");
+          send = document.getElementById("send");
+          function log(str) {
+            return '<p>' + str + '</p>';
+          }
+          send.addEventListener("click", function() {
+            var msg = document.getElementById("message").value;
+            ws.send(msg);
+            output.innerHTML += log("send");
+          });
+          ws.onmessage = (e) => {
+            output.innerHTML += log(e.data);
+          };
+          ws.onclose = (e) => {
+            output.innerHTML += "disconnect";
+          };
+        }
+      }
+      xhr.send(null);
+    });
+  })();
+  </script>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  <input id="message" type="text" /><button id="send">send</button>
+  <div id="output"></div>
+</body>
+</html>
