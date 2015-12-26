@@ -1,0 +1,38 @@
+html, body {
+  margin: 0;
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+}
+.controller {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.connect {
+  height: 80px;
+  text-align: center;
+  margin: 5px;
+  padding-top: 5px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 20px;
+}
+.controller div {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  padding: 10px;
+}
+.controller div button {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background-color: rgba(125, 206, 250, 0.6);
+  border-radius: 20px;
+}
+.controller div button:focus {
+  background-color: rgba(125, 206, 250, 0.6);
+}
