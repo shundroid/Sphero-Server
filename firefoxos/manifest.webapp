@@ -1,0 +1,13 @@
+{
+  "name": "Sphero firefoxos",
+  "description": "SpheroをFirefoxOSで動かします",
+  "launch_path": "/index.html",
+  "icons": {
+    "128": "/icon/sphero-ico.png"
+  },
+  "developer": {
+    "name": "shundroid",
+    "url": "https://github.com/shundroid/"
+  },
+  "default_locale": "ja"
+}
