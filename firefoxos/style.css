@@ -13,7 +13,7 @@ body {
   flex-direction: column;
 }
 .connect {
-  height: 80px;
+  height: 90px;
   text-align: center;
   margin: 5px;
   padding-top: 5px;
@@ -26,13 +26,10 @@ body {
   display: flex;
   padding: 10px;
 }
-.controller div button {
+.controller div div {
   flex: 1;
   height: 100%;
   border: none;
   background-color: rgba(125, 206, 250, 0.6);
   border-radius: 20px;
-}
-.controller div button:focus {
-  background-color: rgba(125, 206, 250, 0.6);
 }

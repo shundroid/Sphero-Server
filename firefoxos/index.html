@@ -11,17 +11,18 @@
 <body>
   <div class="controller">
     <div class="top">
-      <button class="s-control" data-dir="up">↑</button>
+      <div class="s-control" data-dir="up">↑</div>
     </div>
     <div class="middle">
-      <button class="s-control" data-dir="left">←</button>
-      <button class="s-control" data-dir="right">→</button>
+      <div class="s-control" data-dir="left">←</div>
+      <div class="s-control" data-dir="right">→</div>
     </div>
     <div class="bottom">
-      <button class="s-control" data-dir="down">↓</button>
+      <div class="s-control" data-dir="down">↓</div>
     </div>
   </div>
   <div class="connect">
+    <input type="checkbox" id="s-gyro" /><label for="s-gyro">ジャイロセンサー</label><br />
     Server:<input type="text" id="s-server" /><br />
     Port:<input type="number" id="s-port" /><br />
     <button id="s-connect">Connect!</button>
