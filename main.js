@@ -9,18 +9,22 @@ var setting;
 var fs = require("fs");
 var orb;
 var server;
+var wsMessage;
 
 function main() {
-  readSetting(connectSphero);
-  createServer();
-  initWSServer();
+  readSetting(() => {
+    createServer();
+    console.log("server created");
+    orb.connect(connectSphero);
+    initWSServer(); 
+  });
 }
 
-function readSetting(connectCallback) {
+function readSetting(callBack) {
   fs.readFile(__dirname + '/public_html/settings.json', 'utf-8', function(err, data) {
     setting = JSON.parse(data);
     orb = sphero(setting.sphero_serialport);
-    orb.connect(connectCallback);
+    callBack();
   });
 }
 var mimes = {
@@ -35,7 +39,7 @@ function createServer() {
     if (access_to === "/") access_to = "/index.html";
     fs.readFile(__dirname + "/public_html" + access_to, "utf-8", function(err, data) {
       res.writeHead(200, { "Content-Type": mimes[access_to.split(".")[1] ]});
-      res.write(data);
+      res.write(data.toString());
       res.end();
     });
   }).listen(setting.port, setting.ip);
@@ -44,11 +48,11 @@ function initWSServer() {
   var ws = websocket.server;
   var wsServer = new ws({ httpServer: server });
   wsServer.on('request', function(req) {
-    websocket.send("start websocket");
     req.origin = req.origin || '*';
-    var websocket = req.accept(null, req.origin);
-    websocket.on('message', processWSMessage);
-    websocket.on('close', function(code, desc) {
+    wsMessage = req.accept(null, req.origin);
+    wsMessage.send("start websocket");
+    wsMessage.on('message', processWSMessage);
+    wsMessage.on('close', function(code, desc) {
       console.log("closed");
     });
   });
@@ -56,8 +60,7 @@ function initWSServer() {
 function connectSphero() {
   orb.color("blue");
   console.log("connected sphero");
-  createServer();
-};
+}
 
 function processWSMessage(msg) {
   console.log("msg! " + msg.utf8Data);
@@ -73,7 +76,7 @@ function processWSMessage(msg) {
       switch (msg_value) {
         case "color":
           orb.getColor(function(err, data) {
-            websocket.send(data.color);
+            wsMessage.send(data.color);
           });
           break;
       }
@@ -88,7 +91,7 @@ function processWSMessage(msg) {
       break;
   }
   if (isOkSend) {
-    websocket.send("OK.");
+    wsMessage.send("OK.");
   }
 }
 main();

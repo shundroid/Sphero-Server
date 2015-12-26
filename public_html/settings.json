@@ -1,5 +1,5 @@
 {
   "port": 10000,
-  "ip": "10.11.12.156",
-  "sphero_serialport": "COM9"
+  "ip": "10.11.12.147",
+  "sphero_serialport": "COM7"
 }
