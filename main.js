@@ -44,6 +44,7 @@ function initWSServer() {
   var ws = websocket.server;
   var wsServer = new ws({ httpServer: server });
   wsServer.on('request', function(req) {
+    websocket.send("start websocket");
     req.origin = req.origin || '*';
     var websocket = req.accept(null, req.origin);
     websocket.on('message', processWSMessage);
