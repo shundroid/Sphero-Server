@@ -26,6 +26,10 @@ connected spheroと表示された後、
 Fx0などのbluetooth非対応デバイスから、`http://<サーバーのIPアドレス>:<ポート>/`にアクセス。  
 textboxで、`color:red`や、`color:green`などと入力してみると、色が変わる！！  
 
+## クライアント
+
+- [Firefox OS](http://github.com/shundroid/sphero-server-fxos)
+
 ## 最後に
 見てくれてありがとうございます。  
 不具合や要望がありましたら、Issueに上げてください。  
